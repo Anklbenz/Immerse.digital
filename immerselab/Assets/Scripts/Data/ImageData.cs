@@ -5,18 +5,18 @@ public class Attribute
 {
     public string key;
     public string value;
-}
+}*/
 [System.Serializable]
 public class Creator
 {
     public string account;
     public int value;
-}*/
+}
 [System.Serializable]
 public class Image
 {
     public Url url;
-   // public Meta meta;
+    public Meta meta;
 }
 
 [System.Serializable]
@@ -24,12 +24,12 @@ public class Item
 {
     /*public string id;
     public string contract;
-    public string tokenId;
+    public string tokenId;*/
     public List<Creator> creators;
-    public string supply;
-    public string lazySupply;
+    /*public string supply;
+    public string lazySupply;*/
     public List<string> owners;
-    public List<object> royalties;
+    /*public List<object> royalties;
     public DateTime lastUpdatedAt;
     public DateTime mintedAt;
     public List<object> pending;

@@ -13,12 +13,12 @@ public class PanelsDrawer
    }
 
    public void Draw2DImages(List<Texture2D> texturesList){
-      for (var i = 0; i < _imagesUI.Count; i++)
+      for (var i = 0; i < texturesList.Count; i++)
          _imagesUI[i].texture = texturesList[i];
    }
 
    public void DrawCubeSides(List<Texture2D> texturesList){
-      for (var i = 0; i < _imagesUI.Count; i++)
+      for (var i = 0; i < texturesList.Count; i++)
          _cubeMeshes[i].material.mainTexture = texturesList[i];
    }
 }

@@ -11,7 +11,15 @@ public class ImageDownloader
 
         foreach (var url in urls){
             var request = UnityWebRequestTexture.GetTexture(url);
-            await request.SendWebRequest();
+
+            try{
+                await request.SendWebRequest();
+            }
+            catch{
+                Debug.Log("Error broken link occured");
+                continue;
+            }
+
             if (request.result != UnityWebRequest.Result.Success)
                 Debug.LogError("Image Downloading Error.");
             else

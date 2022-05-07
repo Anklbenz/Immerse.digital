@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,20 +29,24 @@ public class MainLogic : MonoBehaviour
       _panelsDrawer = new PanelsDrawer(imagePanels2D, cubeMeshRenderersList);
    }
 
-   public async void Search(string url){
+   public async void Search(string url, Search searchType){
+      var urlList = new List<string>();
       try{
-         var urlList = await _jsonHandler.GetUrlList(url);
-         var textureList = await _imageDownloader.GetImages(urlList);
-         _panelsDrawer.Draw2DImages(textureList);
-         _panelsDrawer.DrawCubeSides(textureList);
-         
-         SearchStatusEvent?.Invoke(true);
+         urlList = await _jsonHandler.GetUrlList(url, searchType);
       }
       catch{
-        // Debug.LogError("Something Went wrong");
+         Debug.Log("Get urls. SendRequest Error. ");
          SearchStatusEvent?.Invoke(false);
       }
+
+      var textureList = await _imageDownloader.GetImages(urlList);
+
+      _panelsDrawer.Draw2DImages(textureList);
+      _panelsDrawer.DrawCubeSides(textureList);
+
+      SearchStatusEvent?.Invoke(true);
    }
+
 
    private void Update() => _inputReceiver.Update();
 }
