@@ -37,6 +37,7 @@ public class MainLogic : MonoBehaviour
       catch{
          Debug.Log("Get urls. SendRequest Error. ");
          SearchStatusEvent?.Invoke(false);
+         return;
       }
 
       var textureList = await _imageDownloader.GetImages(urlList);
@@ -46,7 +47,5 @@ public class MainLogic : MonoBehaviour
 
       SearchStatusEvent?.Invoke(true);
    }
-
-
    private void Update() => _inputReceiver.Update();
 }
