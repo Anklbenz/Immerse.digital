@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Keys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Key name="button_owner">
+		<Translate>
+			<en>Owner</en>
+			<ru>Владелец</ru>
+		</Translate>
+	</Key>
+	<Key name="button_creator">
+		<Translate>
+			<en>Creator</en>
+			<ru>Создатель</ru>
+		</Translate>
+	</Key>
+	<Key name="button_collection">
+		<Translate>
+			<en>Collection</en>
+			<ru>Коллекция</ru>
+		</Translate>
+	</Key>
+	<Key name="button_search">
+		<Translate>
+			<en>Search</en>
+			<ru>Поиск</ru>
+		</Translate>
+	</Key>
+	<Key name="text_enterAddress">
+		<Translate>
+			<en>Enter address</en>
+			<ru>Введите адрес</ru>
+		</Translate>
+	</Key>
+</Keys>

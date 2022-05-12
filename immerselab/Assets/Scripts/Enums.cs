@@ -7,4 +7,10 @@ namespace Enums
         ByCollection = 2,
         ByCreator = 3
     }
+
+    public enum Language
+    {
+        En = 0,
+        Ru = 1
+    }
 }

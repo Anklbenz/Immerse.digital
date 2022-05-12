@@ -16,7 +16,7 @@ public class Creator
 public class Image
 {
     public Url url;
-    public Meta meta;
+   // public Meta meta;
 }
 
 [System.Serializable]
