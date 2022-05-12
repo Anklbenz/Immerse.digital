@@ -4,7 +4,7 @@ using UnityEngine;
 public class LocalizeImage : MonoBehaviour
 {
     private const string LOCALIZATION_PREFIX = "Localization/Sprites/";
-    
+
     [SerializeField] private string key;
     [SerializeField] private UnityEngine.UI.Image image;
 
@@ -19,10 +19,10 @@ public class LocalizeImage : MonoBehaviour
     }
 
     private void Localize(){
-        var sprite = Resources.Load<Sprite>(LOCALIZATION_PREFIX + LocalizationManager.SelectedLanguage.ToString()+"/" + key);
-        if (sprite !=null)
+        var sprite = Resources.Load<Sprite>(LOCALIZATION_PREFIX + LocalizationManager.SelectedLanguage.ToString() + "/" + key);
+        if (sprite != null)
             image.sprite = sprite;
         else
-            Debug.LogError($"Image {key} not found on path:{LOCALIZATION_PREFIX + LocalizationManager.SelectedLanguage.ToString()}/");    
-  }
+            Debug.LogError($"Image {key} not found on path:{LOCALIZATION_PREFIX + LocalizationManager.SelectedLanguage.ToString()}/");
+    }
 }

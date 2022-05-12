@@ -30,4 +30,28 @@
 			<ru>Введите адрес</ru>
 		</Translate>
 	</Key>
+	<Key name="text_loading">
+		<Translate>
+			<en>Loading…</en>
+			<ru>Загрузка…</ru>
+		</Translate>
+	</Key>
+	<Key name="text_badRequestError">
+		<Translate>
+			<en>Address is wrong</en>
+			<ru>Неправильный адрес</ru>
+		</Translate>
+	</Key>
+	<Key name="text_error">
+		<Translate>
+			<en>Something went wrong.</en>
+			<ru>Что-то пошло не так.</ru>
+		</Translate>
+	</Key>
+	<Key name="text_serverError">
+		<Translate>
+			<en>Internal Server Error</en>
+			<ru>Внутренняя ошибка сервера.</ru>
+		</Translate>
+	</Key>
 </Keys>

@@ -5,22 +5,29 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    private const string MESSAGE_LOADING = "Loading...";
-    private const string MESSAGE_ERROR = "Someting Went Wrong Try Again Later...";
+    private const string BAD_REQUEST_ERROR = "text_badRequestError";
+    private const string SOMETHING_WRONG_ERROR = "text_error";
+    private const string SERVER_ERROR = "text_serverError";
+    private const string MESSAGE_LOADING = "text_loading";
 
     [SerializeField] private MainLogic mainLogic;
     [SerializeField] private LocalizationManager localizationManager;
     [SerializeField] private GameObject searchPanel, viewPanel, view2DPanel, cube3D;
     [SerializeField] private InputField addressField;
     [SerializeField] private Toggle owner, creator, collection;
+    [Header("UIErrorPopup")]
+    [SerializeField] private GameObject uiPopupCanvas;
     [SerializeField] private Text notifyLabel;
+    [Header("UIInfoPopup")]
+    [SerializeField] private GameObject uiInfoCanvas;
+    [SerializeField] private Text infoLabel;
 
-    private void OnEnable() => mainLogic.SearchStatusEvent += HandleSearchResult;
+    private void OnEnable() => mainLogic.SearchStatusEvent += SearchResultHandle;
 
-    private void OnDisable() => mainLogic.SearchStatusEvent -= HandleSearchResult;
+    private void OnDisable() => mainLogic.SearchStatusEvent -= SearchResultHandle;
 
     private void Start(){
-        PanelsVisibleState(true, false, false, false);
+        PanelsVisibleState(true, false, false, false, false);
     }
 
     public void OnSearchClick(){
@@ -35,38 +42,56 @@ public class UIHandler : MonoBehaviour
         else
             return;
 
-        MessageNotify(MESSAGE_LOADING);
+        InfoNotify(MESSAGE_LOADING);
         mainLogic.Search(addressField.text, searchType);
     }
 
-    private void HandleSearchResult(bool searchSuccess){
+    private void SearchResultHandle(bool searchSuccess, int searchCode){
         if (searchSuccess)
-            PanelsVisibleState(false, true, true, false);
+            PanelsVisibleState(false, true, true, false, false);
         else
-            MessageNotify(MESSAGE_ERROR);
+            ErrorPopupNotify(searchCode);
     }
 
-    public void OnView2DClick() => PanelsVisibleState(false, true, true, false);
+    public void OnView2DClick() => PanelsVisibleState(false, true, true, false, false);
 
-    public void OnView3DClick() => PanelsVisibleState(false, true, false, true);
+    public void OnView3DClick() => PanelsVisibleState(false, true, false, true, false);
 
-    public void OnBackButtonClick() => PanelsVisibleState(true, false, false, false);
+    public void OnBackButtonClick() => PanelsVisibleState(true, false, false, false, false);
 
     public void OnEnLanguageButtonClick() => localizationManager.SetLanguage(Language.En);
 
     public void OnRuLanguageButtonClick() => localizationManager.SetLanguage(Language.Ru);
 
-    private void PanelsVisibleState(bool search, bool view, bool view2d, bool view3d){
-        if (!search) notifyLabel.enabled = false;
-
+    private void PanelsVisibleState(bool search, bool view, bool view2d, bool view3d, bool popups){
         searchPanel.SetActive(search);
         viewPanel.SetActive(view);
         view2DPanel.SetActive(view2d);
         cube3D.SetActive(view3d);
+        
+              
+        uiPopupCanvas.SetActive(popups);
+        uiInfoCanvas.SetActive(popups);
     }
 
-    private void MessageNotify(string message){
-        notifyLabel.text = message;
-        notifyLabel.enabled = true;
+    private void ErrorPopupNotify(int errorCode){
+        switch (errorCode){
+            case 400:
+                notifyLabel.text = BAD_REQUEST_ERROR;
+                break;
+            case 500:
+                notifyLabel.text = SERVER_ERROR;
+                break;
+            default:
+                notifyLabel.text = SOMETHING_WRONG_ERROR;
+                break;
+        }
+
+        uiPopupCanvas.SetActive(true);
+    }
+
+    private void InfoNotify(string msg){
+        infoLabel.text = msg;
+        uiInfoCanvas.SetActive(true);
     }
 }

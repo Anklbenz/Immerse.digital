@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainLogic : MonoBehaviour
 {
-   public Action<bool> SearchStatusEvent;
+   public Action<bool,int> SearchStatusEvent;
    
    [Header("RotatableObject")]
    [SerializeField] private Transform rotatableObject;
@@ -31,12 +31,12 @@ public class MainLogic : MonoBehaviour
 
    public async void Search(string url, Search searchType){
       var urlList = new List<string>();
+      
       try{
          urlList = await _jsonHandler.GetUrlList(url, searchType);
       }
       catch{
-         Debug.Log("Get urls. SendRequest Error. ");
-         SearchStatusEvent?.Invoke(false);
+         SearchStatusEvent?.Invoke(false, _jsonHandler.ServerResponseCode);
          return;
       }
 
@@ -44,8 +44,7 @@ public class MainLogic : MonoBehaviour
 
       _panelsDrawer.Draw2DImages(textureList);
       _panelsDrawer.DrawCubeSides(textureList);
-
-      SearchStatusEvent?.Invoke(true);
+      SearchStatusEvent?.Invoke(true, _jsonHandler.ServerResponseCode);
    }
    private void Update() => _inputReceiver.Update();
 }
