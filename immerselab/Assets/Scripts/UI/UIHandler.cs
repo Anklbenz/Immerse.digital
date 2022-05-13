@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour
 {
     private const string BAD_REQUEST_ERROR = "text_badRequestError";
-    private const string SOMETHING_WRONG_ERROR = "text_error";
+    private const string SOMETHING_WRONG_ERROR = "text_otherError";
     private const string SERVER_ERROR = "text_serverError";
     private const string MESSAGE_LOADING = "text_loading";
 
@@ -17,10 +17,10 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Toggle owner, creator, collection;
     [Header("UIErrorPopup")]
     [SerializeField] private GameObject uiPopupCanvas;
-    [SerializeField] private Text notifyLabel;
+    [SerializeField] private LocalizeText notifyLabel;
     [Header("UIInfoPopup")]
     [SerializeField] private GameObject uiInfoCanvas;
-    [SerializeField] private Text infoLabel;
+    [SerializeField] private LocalizeText infoLabel;
 
     private void OnEnable() => mainLogic.SearchStatusEvent += SearchResultHandle;
 
@@ -69,7 +69,6 @@ public class UIHandler : MonoBehaviour
         view2DPanel.SetActive(view2d);
         cube3D.SetActive(view3d);
         
-              
         uiPopupCanvas.SetActive(popups);
         uiInfoCanvas.SetActive(popups);
     }
@@ -77,13 +76,13 @@ public class UIHandler : MonoBehaviour
     private void ErrorPopupNotify(int errorCode){
         switch (errorCode){
             case 400:
-                notifyLabel.text = BAD_REQUEST_ERROR;
+                notifyLabel.key = BAD_REQUEST_ERROR;
                 break;
             case 500:
-                notifyLabel.text = SERVER_ERROR;
+                notifyLabel.key = SERVER_ERROR;
                 break;
             default:
-                notifyLabel.text = SOMETHING_WRONG_ERROR;
+                notifyLabel.key = SOMETHING_WRONG_ERROR;
                 break;
         }
 
@@ -91,7 +90,7 @@ public class UIHandler : MonoBehaviour
     }
 
     private void InfoNotify(string msg){
-        infoLabel.text = msg;
+        infoLabel.key = msg;
         uiInfoCanvas.SetActive(true);
     }
 }

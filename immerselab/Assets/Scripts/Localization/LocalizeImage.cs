@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(UnityEngine.UI.Image))]
@@ -12,6 +13,10 @@ public class LocalizeImage : MonoBehaviour
         image = GetComponent<UnityEngine.UI.Image>();
         Localize();
         LocalizationManager.LanguageChangeEvent += OnLanguageChange;
+    }
+
+    private void OnDestroy(){
+        LocalizationManager.LanguageChangeEvent -= OnLanguageChange;
     }
 
     private void OnLanguageChange(){

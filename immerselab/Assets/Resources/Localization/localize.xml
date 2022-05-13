@@ -42,7 +42,7 @@
 			<ru>Неправильный адрес</ru>
 		</Translate>
 	</Key>
-	<Key name="text_error">
+	<Key name="text_otherError">
 		<Translate>
 			<en>Something went wrong.</en>
 			<ru>Что-то пошло не так.</ru>
@@ -52,6 +52,12 @@
 		<Translate>
 			<en>Internal Server Error</en>
 			<ru>Внутренняя ошибка сервера.</ru>
+		</Translate>
+	</Key>
+	<Key name="text_error">
+		<Translate>
+			<en>Oops. Error</en>
+			<ru>Упс. Ошибка</ru>
 		</Translate>
 	</Key>
 </Keys>
